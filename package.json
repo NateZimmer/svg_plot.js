@@ -1,0 +1,14 @@
+{
+  "name": "svg-plot",
+  "version": "0.0.1",
+  "description": "Simple Offline SVG Plot Generator",
+  "main": "svg-plot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "d3-node": "^2.2.0"
+  }
+}

@@ -1,0 +1,21 @@
+path { 
+    stroke: steelblue;
+    stroke-width: 2;
+    fill: none;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+.legend {
+    font-weight: bold;
+    text-anchor: middle;
+    font-family: Arial;
+}
+
+text { font: 12px Arial; font-weight:"bold"}
