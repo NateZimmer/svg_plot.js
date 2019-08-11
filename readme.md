@@ -20,6 +20,8 @@ svg_plot.plot(csvString,'myPlot','Time');
 
 **Usage Output:** `myPlot.svg`
 
+Note, this will render on github but may not on npm's registery. See [examples/myPlot.svg](examples/myPlot.svg) for reference.
+
 <p align='center'>
     <img src='examples/myPlot.svg'>
 </p>
