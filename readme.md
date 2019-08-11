@@ -2,7 +2,6 @@
 
 svg-plot.js is a simple library to programatically create svg plots from csv formatted data. This is designed for regression testing where a visual component of data is desired. 
 
-
 **Install:**
 
 ```console
@@ -19,21 +18,22 @@ svg_plot.plot(csvString,'myPlot','Time');
 // Generates myPlot.svg
 ```
 
-**Usage Output:** myPlot.svg
+**Usage Output:** `myPlot.svg`
 
 <p align='center'>
-    <img src='examples/myPlot.svg' height='400px'>
+    <img src='examples/myPlot.svg'>
 </p>
 
 **CSV Format** `testThermal.csv`
 
-```
+```csv
 Time,On,Temperature,Setpoint
 0,63,60,70
 10,68,59.97222222222222,70
 20,68,60.01396604938272,70
 30,68,60.05559392146776,70
 40,68,60.097106160574796,70
+...
 ```
 
 ### About: 

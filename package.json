@@ -10,5 +10,9 @@
   "license": "MIT",
   "dependencies": {
     "d3-node": "^2.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NateZimmer/svg_plot.js.git"
   }
 }
