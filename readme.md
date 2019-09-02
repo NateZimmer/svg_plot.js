@@ -1,5 +1,7 @@
 # svg-plot.js
 
+<span class="badge-npmversion"><a href="https://npmjs.org/package/badges" title="View this project on NPM"><img src="https://img.shields.io/npm/v/svg-plot.svg" alt="NPM version" /></a></span> [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
+
 svg-plot.js is a simple library to programatically create svg plots from csv formatted data. This is designed for regression testing where a visual component of data is desired. 
 
 **Install:**
@@ -72,13 +74,13 @@ svg_plot.plot(csvString,{
 });
 ```
 
-**Usage Output**: [examples/mypivotPlot.svg](examples/mypivotPlot.svg)
+**Usage Output**: [examples/myPivotPlot.svg](examples/myPivotPlot.svg)
 
 <p align='center'>
-    <img src='examples/mypivotPlot.svg'>
+    <img src='examples/myPivotPlot.svg'>
 </p>
 
-**CSV Format** [examples/testpivotThermal.csv](examples/testpivotThermal.csv)
+**CSV Format** [examples/testPivotThermal.csv](examples/testPivotThermal.csv)
 
 ```
 Event,Point,Value,Time,Info
