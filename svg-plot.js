@@ -36,6 +36,10 @@ function extentNested(data,accessor,y2List){
     return {range1:[min,max],range2:[min2,max2]};
 }
 
+var ticks = 7;
+
+
+
 function plot(csvData,options){
     var foundError = false;
 
@@ -129,36 +133,66 @@ function plot(csvData,options){
         y2.domain(optArgs.y2Range);
     }
     
-    var color = d3.scaleOrdinal(d3.schemeCategory10);
-    legendSpace = width/ObjArray.length; 
-    ObjArray.forEach(function(d,i) { 
-
-    var dataVals = null;
-    if(optArgs.y2List.length == 0){
-        dataVals = dataGen(d.values);
-    }else{
-        if(optArgs.y2List.includes(d.key)){
-            dataVals = dataGen2(d.values);
-        }else{
-            dataVals = dataGen(d.values);
-        }
+    // gridlines in x axis function
+    function make_x_gridlines() {		
+        return d3.axisBottom(x)
+            .ticks(ticks)
     }
 
-    svg.append("path")
-    .attr("class", "line")
-    .style("stroke", function() { 
-        return d.color = color(d.key); })
-    .attr("id", 'tag'+d.key.replace(/\s+/g, '')) 
-    .attr("d", dataVals);
+    // gridlines in y axis function
+    function make_y_gridlines() {		
+        return d3.axisLeft(y)
+            .ticks(ticks)
+    }
 
-    svg.append("text")
-    .attr("x", (legendSpace/2)+i*legendSpace)  
-    .attr("y", height + (margin.bottom/2)+ 5)
-    .attr("class", "legend")    
-    .style("fill", function() { 
-        return d.color = color(d.key); }) 
-    .text(d.key); 
 
+    var color = d3.scaleOrdinal(d3.schemeCategory10);
+    legendSpace = width/ObjArray.length; 
+
+
+    svg.append("g")			
+    .attr("class", "grid")
+    .attr("transform", "translate(0," + height + ")")
+    .call(make_x_gridlines()
+        .tickSize(-height)
+        .tickFormat("")
+    ).style("stroke-dasharray", ("1, 2"))  // <== This line here!!
+
+    // add the Y gridlines
+    svg.append("g")			
+    .attr("class", "grid")
+    .call(make_y_gridlines()
+        .tickSize(-width)
+        .tickFormat("")
+    ).style("stroke-dasharray", ("1, 2"))  // <== This line here!!
+
+
+    ObjArray.forEach(function(d,i) { 
+        var dataVals = null;
+        if(optArgs.y2List.length == 0){
+            dataVals = dataGen(d.values);
+        }else{
+            if(optArgs.y2List.includes(d.key)){
+                dataVals = dataGen2(d.values);
+            }else{
+                dataVals = dataGen(d.values);
+            }
+        }
+
+        svg.append("path")
+        .attr("class", "line")
+        .style("stroke", function() { 
+            return d.color = color(d.key); })
+        .attr("id", 'tag'+d.key.replace(/\s+/g, '')) 
+        .attr("d", dataVals);
+
+        svg.append("text")
+        .attr("x", (legendSpace/2)+i*legendSpace)  
+        .attr("y", height + (margin.bottom/2)+ 5)
+        .attr("class", "legend")    
+        .style("fill", function() { 
+            return d.color = color(d.key); }) 
+        .text(d.key); 
     });
 
     svg.append("g")
