@@ -13,7 +13,6 @@ var styleStr = fs.readFileSync(path.resolve(__dirname, 'plot.css')).toString();
 var d3n = new D3Node({styles:styleStr });
 var d3 = d3n.d3;
 
-
 var args = {fileName:'',timeKey:''}
 var optArgs = {pivotCSV:false,pivotKey:'',pivotValue:'',y2List:[],ignoreList:[],includeList:null,y1Curve:d3.curveLinear,y2Curve:d3.curveStepAfter,title:null,y2Range:null}
 
@@ -36,9 +35,7 @@ function extentNested(data,accessor,y2List){
     return {range1:[min,max],range2:[min2,max2]};
 }
 
-var ticks = 7;
-
-
+var ticks = 7; // Amount of ticks/grids on x & y axis 
 
 function plot(csvData,options){
     var foundError = false;
@@ -81,6 +78,12 @@ function plot(csvData,options){
     var yMin = 1e100;
     var ObjArray = [];
 
+    // Ensure timeKey is present
+    if(data.columns.includes(args.timeKey) == false)
+    {
+        throw("Time key not found in header or incorrectly specified");
+    }
+
     if(!optArgs.pivotCSV){
         for(var col of data.columns){
             if(col != args.timeKey){
@@ -95,7 +98,7 @@ function plot(csvData,options){
                 ObjArray.push(Obj);
             }
         }
-        x.domain([0, d3.max(data, function(d) { return parseFloat(d.Time); })]);
+        x.domain([0, d3.max(data, function(d) { return parseFloat(d[args.timeKey]); })]);
         optArgs.pivotValue='val';
     }else{
         ObjArray = d3.nest().key((d)=>{return d[optArgs.pivotKey]}).entries(data)
@@ -219,8 +222,6 @@ function plot(csvData,options){
 		.style("font-size", "14px") 		
 		.text(optArgs.title);	
     }
-
-
 
     fs.writeFileSync(args.fileName + '.svg', d3n.svgString());
 }
